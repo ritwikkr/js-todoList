@@ -2,4 +2,123 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.body {
+  width: 500px;
+  margin: 50px auto 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.body header .add-todo {
+  background-color: rgb(236, 236, 236);
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin: 10px 0;
+}
+.body header .add-todo .icon {
+  margin: 0 10px;
+  font-size: 22px;
+}
+
+.body header .add-todo input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 20px;
+}
+
+.body header .complete-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.body header .complete-task .task-done {
+  display: flex;
+  width: 33%;
+  justify-content: space-between;
+  cursor: pointer;
+  color: gray;
+}
+
+.body header .complete-task .clear-complete {
+  cursor: pointer;
+  color: gray;
+}
+
+hr {
+  margin: 15px 0;
+  background-color: lightgray;
+}
+
+.body main ul li {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.body main ul li .checkbox {
+  margin: 0 10px;
+}
+
+.body main ul li .checkbox input {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.body main ul li .todo-title {
+  flex: 1;
+  font-size: 18px;
+}
+
+.body main ul li .delete-icon {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.body main ul li:hover .delete-icon {
+  visibility: visible;
+}
+
+.body footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.body footer .task-count {
+  font-size: 15px;
+  color: gray;
+}
+
+.body footer .task-count span {
+  font-weight: 700;
+  color: black;
+}
+
+.body footer .filter-task ul {
+  display: flex;
+}
+
+.body footer .filter-task ul li {
+  list-style: none;
+  margin: 0 5px;
+  font-size: 15px;
+  color: gray;
+  cursor: pointer;
 }
