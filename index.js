@@ -6,6 +6,7 @@ const taskCountElem = document.querySelector(".task-count span");
 const allElem = document.querySelector(".all");
 const uncompletedElem = document.querySelector(".uncompleted");
 const completedElem = document.querySelector(".completed");
+const clearCompleteElem = document.querySelector(".clear-complete p");
 
 // Event Listeners
 window.addEventListener("load", function () {
@@ -35,6 +36,12 @@ uncompletedElem.addEventListener("click", function () {
 completedElem.addEventListener("click", function () {
   const newTaskList = taskList.filter((task) => task.complete === true);
   return render(newTaskList);
+});
+
+clearCompleteElem.addEventListener("click", function () {
+  taskList
+    .filter((task) => task.complete === true)
+    .map((task) => deleteTodo(task.id));
 });
 
 // Functions
