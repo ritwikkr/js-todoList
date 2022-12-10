@@ -7,6 +7,7 @@ const allElem = document.querySelector(".all");
 const uncompletedElem = document.querySelector(".uncompleted");
 const completedElem = document.querySelector(".completed");
 const clearCompleteElem = document.querySelector(".clear-complete p");
+const completeAllTasks = document.querySelector(".task-done p");
 
 // Event Listeners
 window.addEventListener("load", function () {
@@ -42,6 +43,11 @@ clearCompleteElem.addEventListener("click", function () {
   taskList
     .filter((task) => task.complete === true)
     .map((task) => deleteTodo(task.id));
+});
+
+completeAllTasks.addEventListener("click", function () {
+  taskList.map((task) => toggleTodo(task.id));
+  return render(taskList);
 });
 
 // Functions
