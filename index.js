@@ -7,7 +7,7 @@ addTodoElem.addEventListener("keyup", function (e) {
   const todo = addTodoElem.value;
   if (e.key == "Enter") {
     addTodoElem.value = "";
-    taskList.push({ id: Date.now(), todo });
+    taskList.push({ id: Date.now(), todo, complete: false });
     setToLocalStorage();
     return render();
   }
@@ -22,7 +22,7 @@ function render() {
   taskList.map((todo) => {
     const li = document.createElement("li");
     li.innerHTML = `  <div class="checkbox">
-                        <input type="checkbox" />
+                        <input type="checkbox" onclick="toggleTodo(${todo.id})"/>
                     </div>
                     <div class="todo-title">
                         <p>${todo.todo}</p>
@@ -42,8 +42,16 @@ function deleteTodo(id) {
   return render();
 }
 
+function toggleTodo(id) {
+  taskList.map((task) => {
+    if (task.id === id) {
+      task.complete = !task.complete;
+    }
+  });
+  console.log(taskList);
+}
+
 window.addEventListener("load", function () {
   taskList = JSON.parse(localStorage.getItem("taskList"));
-  console.log(taskList);
   return render();
 });
