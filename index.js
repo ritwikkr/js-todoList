@@ -1,7 +1,17 @@
+// Elements
 const addTodoElem = document.querySelector(".add-todo input");
 const ulElem = document.querySelector("main ul");
 let taskList = [];
 const taskCountElem = document.querySelector(".task-count span");
+const allElem = document.querySelector(".all");
+const uncompletedElem = document.querySelector(".uncompleted");
+const completedElem = document.querySelector(".completed");
+
+// Event Listeners
+window.addEventListener("load", function () {
+  taskList = JSON.parse(localStorage.getItem("taskList")) || [];
+  return render(taskList);
+});
 
 addTodoElem.addEventListener("keyup", function (e) {
   const todo = addTodoElem.value;
@@ -9,20 +19,37 @@ addTodoElem.addEventListener("keyup", function (e) {
     addTodoElem.value = "";
     taskList.push({ id: Date.now(), todo, complete: false });
     setToLocalStorage();
-    return render();
+    return render(taskList);
   }
 });
 
+allElem.addEventListener("click", function () {
+  return render(taskList);
+});
+
+uncompletedElem.addEventListener("click", function () {
+  const newtaskList = taskList.filter((task) => task.complete === false);
+  return render(newtaskList);
+});
+
+completedElem.addEventListener("click", function () {
+  const newTaskList = taskList.filter((task) => task.complete === true);
+  return render(newTaskList);
+});
+
+// Functions
 function setToLocalStorage() {
   localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
-function render() {
+function render(taskList) {
   ulElem.innerHTML = ""; // this is to be remembered
   taskList.map((todo) => {
     const li = document.createElement("li");
     li.innerHTML = `  <div class="checkbox">
-                        <input type="checkbox" onclick="toggleTodo(${todo.id})"/>
+                        <input type="checkbox" onclick="toggleTodo(${
+                          todo.id
+                        })" ${todo.complete && `checked`}>
                     </div>
                     <div class="todo-title">
                         <p>${todo.todo}</p>
@@ -39,7 +66,7 @@ function render() {
 function deleteTodo(id) {
   taskList = taskList.filter((task) => task.id !== id);
   localStorage.setItem("taskList", JSON.stringify(taskList));
-  return render();
+  return render(taskList);
 }
 
 function toggleTodo(id) {
@@ -49,9 +76,5 @@ function toggleTodo(id) {
     }
   });
   console.log(taskList);
+  return setToLocalStorage();
 }
-
-window.addEventListener("load", function () {
-  taskList = JSON.parse(localStorage.getItem("taskList"));
-  return render();
-});
